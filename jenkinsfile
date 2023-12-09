@@ -1,27 +1,15 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Checkout') {
+stage('Build') {
             steps {
-                checkout scm
-            }
-        }
-
-        stage('Build') {
-            steps {
-                script {
-                    // Assuming your project uses Maven
-                    sh 'mvn clean package'
-                }
-            }
-        }
-
-        stage('Test') {
-            steps {
-                script {
-                    // Assuming your project has tests
-                    sh 'mvn test'
-                }
+                // Set up Java and Maven, then build the project
+                sh """
+                    export JAVA_HOME=${JAVA_HOME}
+                    export PATH=\$JAVA_HOME/bin:\$PATH
+                    export MAVEN_HOME=${MAVEN_HOME}
+                    export PATH=\$MAVEN_HOME/bin:\$PATH
+                    mvn clean package
+                """
             }
         }
