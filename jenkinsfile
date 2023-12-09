@@ -1,15 +1,10 @@
 pipeline {
     agent any
-
-stage('Build') {
+    stages {
+        stage('build') {
             steps {
-                // Set up Java and Maven, then build the project
-                sh """
-                    export JAVA_HOME=${JAVA_HOME}
-                    export PATH=\$JAVA_HOME/bin:\$PATH
-                    export MAVEN_HOME=${MAVEN_HOME}
-                    export PATH=\$MAVEN_HOME/bin:\$PATH
-                    mvn clean package
-                """
+                sh 'echo Hello World'
             }
         }
+    }
+}
